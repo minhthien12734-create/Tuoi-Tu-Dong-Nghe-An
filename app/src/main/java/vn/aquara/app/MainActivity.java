@@ -27,23 +27,13 @@ public class MainActivity extends Activity {
         LinearLayout names=new LinearLayout(this);names.setOrientation(1);pad(names,9,0,0,0);brand.addView(names);
         names.addView(text("TƯỚI TỰ ĐỘNG NGHỆ AN",17,DARK,true));names.addView(text("TƯỚI TỰ ĐỘNG · ĐIỆN THÔNG MINH",9,GREEN,true));
         gap(14);
-        FrameLayout player=new FrameLayout(this);player.setBackground(bg(Color.rgb(225,238,229),15));player.setClipToOutline(true);page.addView(player,new LinearLayout.LayoutParams(-1,dp(235)));
-        int id=getResources().getIdentifier("gioi_thieu","raw",getPackageName());
-        if(id!=0){
-            video=new VideoView(this);player.addView(video,new FrameLayout.LayoutParams(-1,-1));
-            video.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+id));
-            video.setOnPreparedListener(mp->{mp.setLooping(false);});
-            MediaController controls=new MediaController(this);controls.setAnchorView(video);video.setMediaController(controls);
-            Button play=new Button(this);play.setText("▶ PHÁT VIDEO GIỚI THIỆU");play.setTextColor(Color.WHITE);play.setBackground(bg(GREEN,12));
-            FrameLayout.LayoutParams pp=new FrameLayout.LayoutParams(-2,dp(50),Gravity.CENTER);player.addView(play,pp);
-            play.setOnClickListener(v->{play.setVisibility(View.GONE);video.start();});
-        }else{
-            LinearLayout empty=new LinearLayout(this);empty.setGravity(Gravity.CENTER);empty.setOrientation(1);pad(empty,18,20,18,20);player.addView(empty,new FrameLayout.LayoutParams(-1,-1));
-            TextView symbol=text("▶",38,GREEN,true);symbol.setGravity(Gravity.CENTER);empty.addView(symbol);
-            TextView note=text("VIDEO GIỚI THIỆU",17,DARK,true);note.setGravity(Gravity.CENTER);empty.addView(note);
-            TextView hint=text("Thêm file gioi_thieu.mp4 vào app/src/main/res/raw để phát video có sẵn.",12,Color.DKGRAY,false);hint.setGravity(Gravity.CENTER);pad(hint,0,10,0,0);empty.addView(hint);
-        }
-        gap(13);page.addView(text("GIẢI PHÁP THÔNG MINH",19,DARK,true));gap(5);
+       ImageView banner = new ImageView(this);
+banner.setImageResource(R.drawable.anh_gioi_thieu);
+banner.setScaleType(ImageView.ScaleType.CENTER_CROP);
+banner.setBackground(bg(Color.rgb(225,238,229),15));
+banner.setClipToOutline(true);
+page.addView(banner,
+    new LinearLayout.LayoutParams(-1,dp(235)));gap(5);
         page.addView(text("Tiết kiệm nước · Chăm sóc cảnh quan · Tự động hóa ngôi nhà",12,Color.DKGRAY,false));gap(13);
         Button call=new Button(this);call.setText("☎  GỌI NGAY · 0911113759");call.setTextColor(Color.WHITE);call.setTextSize(15);call.setAllCaps(false);call.setBackground(bg(GREEN,10));page.addView(call,new LinearLayout.LayoutParams(-1,dp(54)));
         call.setOnClickListener(v->{Intent i=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:0911113759"));startActivity(i);});
